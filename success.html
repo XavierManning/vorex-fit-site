@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080808">
+    <title>You're in — Vorex</title>
+    <meta name="description" content="Your Vorex subscription is active. Check your email for your team setup code.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="apple-touch-icon" href="/assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="/" class="nav__brand" aria-label="Vorex home">
+                <span class="nav__brand-mark">V</span>
+                <span>VOREX</span>
+            </a>
+            <div class="nav__links">
+                <a href="/" class="nav__link">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page">
+        <div class="page__card">
+            <div class="page__icon" aria-hidden="true">✓</div>
+            <h1 class="page__title">YOU'RE IN.</h1>
+            <p class="page__subtitle">Your subscription is active. We just sent your team setup code to your email.</p>
+
+            <div class="page__highlight">
+                <strong>📧 Check your inbox</strong> at the email you used at checkout. Look for an email from <strong>Vorex &lt;noreply@vorex.fit&gt;</strong> with your <code>COACH-XXXX-XXXX</code> code.
+            </div>
+
+            <a href="https://apps.apple.com/" class="cta cta--gold cta--block" aria-label="Download Vorex on the App Store">
+                ⬇  DOWNLOAD VOREX
+            </a>
+            <a href="vorex://" class="page__secondary">Already have the app? Open Vorex →</a>
+
+            <p class="page__support">Didn't get the email? Check spam, or contact <a href="mailto:xavier@vorex.fit" style="color: var(--gold);">xavier@vorex.fit</a></p>
+            <p class="page__reference" id="orderReference"></p>
+        </div>
+    </main>
+
+    <script>
+        // Show last 6 chars of Stripe session_id as a confirmation reference.
+        // The actual COACH-XXXX-XXXX code is delivered via email — never
+        // displayed on this page (the email is the secure delivery channel).
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const sid = params.get("session_id");
+            if (sid && sid.length > 6) {
+                document.getElementById("orderReference").textContent =
+                    "Order reference: …" + sid.slice(-6);
+            }
+        })();
+    </script>
+</body>
+</html>

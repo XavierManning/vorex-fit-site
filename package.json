@@ -1,0 +1,16 @@
+{
+    "name": "vorex-fit-site",
+    "version": "1.0.0",
+    "description": "Vorex coach acquisition site (vorex.fit). Static HTML/CSS/JS + Netlify Function for Stripe Checkout.",
+    "private": true,
+    "scripts": {
+        "dev": "netlify dev",
+        "serve": "npx http-server . -p 8080 -c-1"
+    },
+    "dependencies": {
+        "stripe": "^17.0.0"
+    },
+    "engines": {
+        "node": ">=18"
+    }
+}
