@@ -73,9 +73,13 @@ exports.handler = async (event) => {
             },
             success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url:  `${origin}/cancel.html`,
-            // Collect email — required for the Resend follow-up email
-            // that delivers the COACH-XXXX-XXXX code.
-            customer_creation: "always",
+            // Note: `customer_creation` is NOT valid in subscription mode
+            // (Stripe API error: "customer_creation can only be used in
+            // payment mode"). Subscription mode ALWAYS creates a
+            // customer automatically — the param is implicit.
+            // Stripe Checkout still collects the email on its hosted
+            // page, so the Resend follow-up email that delivers the
+            // COACH-XXXX-XXXX code still has what it needs.
             billing_address_collection: "auto"
         });
         return json(200, { url: session.url });

@@ -103,13 +103,22 @@ ul { list-style: none; }
     color: var(--gold);
 }
 .nav__brand-mark {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    object-fit: cover;
-    /* Falls back to a gold gradient bg if the <img> 404s or while it
-       loads — preserves the brand-mark silhouette either way. */
-    background: linear-gradient(135deg, var(--gold-light), var(--gold-shadow));
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    /* `contain` (not `cover`) ensures the full icon shows without
+       cropping — the source PNG is a 1024×1024 widget icon with
+       its own internal padding, so cropping would chop the V mark. */
+    object-fit: contain;
+    /* Visible gold gradient bg + border give the brand mark a
+       clearly-defined silhouette against the dark nav, even when
+       the icon's own pixels are predominantly dark (which they
+       are — the source is a Live Activity widget icon designed for
+       a black lock-screen). */
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-deep));
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset,
+                0 4px 12px rgba(200, 150, 12, 0.35);
+    padding: 2px;
     display: block;
 }
 .nav__links {
