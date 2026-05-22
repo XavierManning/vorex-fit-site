@@ -10,12 +10,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Termly iframe wrapper — keeps the dark frame around the
+           white policy contents and fills the viewport. */
+        .termly-frame {
+            display: block;
+            width: 100%;
+            min-height: calc(100vh - 64px - 88px); /* nav + footer */
+            border: 0;
+            background: #ffffff;
+            border-radius: 12px;
+        }
+        .termly-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px var(--gutter);
+        }
+        .termly-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 48px);
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <nav class="nav">
         <div class="nav__inner">
             <a href="/" class="nav__brand" aria-label="Vorex home">
-                <span class="nav__brand-mark">V</span>
+                <img src="/assets/logo.png" alt="" class="nav__brand-mark" width="28" height="28">
                 <span>VOREX</span>
             </a>
             <div class="nav__links">
@@ -25,35 +49,13 @@
         </div>
     </nav>
 
-    <main class="legal">
-        <h1 class="legal__title">TERMS OF SERVICE</h1>
-        <p class="legal__updated">Last updated: May 22, 2026</p>
-
-        <p>These Terms of Service ("Terms") govern your access to and use of Vorex, including the Vorex iOS app, the vorex.fit website, and any related services (collectively, the "Service"). By creating an account or subscribing to the Service, you agree to be bound by these Terms.</p>
-
-        <h2>1. Acceptance</h2>
-        <p>By using Vorex you confirm that you are at least 13 years of age, or have the supervision of a parent or guardian who agrees to these Terms on your behalf. Coaches subscribing on behalf of an organization warrant that they have authority to bind that organization.</p>
-
-        <h2>2. Use of the Service</h2>
-        <p>You agree to use the Service only for its intended purpose: athletic training, nutrition tracking, and team coaching. You will not attempt to reverse-engineer the Service, share your account credentials, or use the Service for any unlawful purpose.</p>
-
-        <h2>3. Subscriptions and Billing</h2>
-        <p>Coach subscriptions are billed monthly or annually through Stripe. Subscriptions automatically renew at the end of each billing period unless canceled at least 24 hours before renewal. Free trials may be offered at our discretion and can be canceled at any time during the trial period without charge.</p>
-
-        <h2>4. Cancellation and Refunds</h2>
-        <p>You may cancel your subscription at any time through your Stripe customer portal or by contacting <a href="mailto:xavier@vorex.fit" style="color: var(--gold);">xavier@vorex.fit</a>. We do not issue prorated refunds for partial billing periods. After cancellation, you retain access to coach features until the end of the current billing period.</p>
-
-        <h2>5. Content and Data</h2>
-        <p>You retain ownership of any content you upload to Vorex (photos, workout logs, nutrition entries, team rosters). You grant us a limited license to host and display this content as part of providing the Service. We do not sell your personal data.</p>
-
-        <h2>6. Limitation of Liability</h2>
-        <p>Vorex is provided "as is" without warranties of any kind. To the maximum extent permitted by law, Vorex Health LLC is not liable for any indirect, incidental, or consequential damages arising from your use of the Service. Our total liability under these Terms is limited to the amount you paid us in the 12 months preceding the claim.</p>
-
-        <h2>7. Changes to These Terms</h2>
-        <p>We may update these Terms from time to time. Material changes will be communicated by email and via in-app notice at least 14 days before taking effect.</p>
-
-        <h2>8. Contact</h2>
-        <p>Questions about these Terms? Contact us at <a href="mailto:xavier@vorex.fit" style="color: var(--gold);">xavier@vorex.fit</a>.</p>
+    <main class="termly-wrap">
+        <h1 class="termly-title">TERMS OF SERVICE</h1>
+        <iframe
+            class="termly-frame"
+            src="https://app.termly.io/policy-viewer/policy.html?policyUUID=f6ebfc48-d853-4104-ad0e-67c2b1be393d"
+            title="Vorex Terms of Service"
+            loading="lazy"></iframe>
     </main>
 
     <footer class="footer">

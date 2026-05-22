@@ -105,12 +105,12 @@ ul { list-style: none; }
 .nav__brand-mark {
     width: 28px;
     height: 28px;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold-shadow));
     border-radius: 6px;
-    display: grid; place-items: center;
-    color: #080808;
-    font-family: var(--font-display);
-    font-size: 18px;
+    object-fit: cover;
+    /* Falls back to a gold gradient bg if the <img> 404s or while it
+       loads — preserves the brand-mark silhouette either way. */
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-shadow));
+    display: block;
 }
 .nav__links {
     display: flex;
@@ -230,15 +230,15 @@ section { padding: clamp(64px, 10vw, 140px) 0; position: relative; }
             to right,
             transparent,
             transparent 99px,
-            rgba(255, 255, 255, 0.03) 99px,
-            rgba(255, 255, 255, 0.03) 100px
+            rgba(255, 255, 255, 0.015) 99px,
+            rgba(255, 255, 255, 0.015) 100px
         ),
         repeating-linear-gradient(
             to bottom,
             transparent,
             transparent 99px,
-            rgba(255, 255, 255, 0.03) 99px,
-            rgba(255, 255, 255, 0.03) 100px
+            rgba(255, 255, 255, 0.015) 99px,
+            rgba(255, 255, 255, 0.015) 100px
         );
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
