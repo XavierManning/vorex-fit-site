@@ -24,6 +24,11 @@
   to     = "/privacy.html"
   status = 200
 
+[[redirects]]
+  from   = "/account"
+  to     = "/account.html"
+  status = 200
+
 # Long-lived caching for static assets
 [[headers]]
   for = "/css/*"
