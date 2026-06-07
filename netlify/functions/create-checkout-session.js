@@ -11,7 +11,7 @@
    Flow:
      1. Client (js/checkout.js) POSTs the active price ID
      2. We create a Stripe Checkout Session (subscription mode,
-        30-day free trial, promo codes allowed)
+        14-day free trial, promo codes allowed)
      3. Return the hosted checkout URL — client redirects to it
      4. Stripe handles the rest and fires the webhook configured
         in the Supabase project (stripe-webhook Edge Function),
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
             line_items: [{ price: priceId, quantity: 1 }],
             allow_promotion_codes: true,
             subscription_data: {
-                trial_period_days: 30,
+                trial_period_days: 14,
                 metadata: { source: "vorex.fit" }
             },
             success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
