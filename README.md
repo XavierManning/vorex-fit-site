@@ -119,8 +119,7 @@ with events: `checkout.session.completed`, `customer.subscription.updated`, `cus
 
 ## TODOs
 
-- Replace placeholder testimonial copy with real coach quotes
-- Replace placeholder "trusted by" logos with real institutional marks
+- Add real coach testimonials once the first teams (two Florida USL2 clubs) finish onboarding for the 2026 season — replaces the current founder block
 - Drop `assets/logo.png` (gold V mark) and `assets/og-image.png` (1200×630 social card)
 - Wire `data-demo-modal` to a real video player when demo video is recorded
 - Consider Plausible or Fathom for privacy-respecting analytics later (no tracking pixels in v1)

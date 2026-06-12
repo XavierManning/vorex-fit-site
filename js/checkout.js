@@ -1,6 +1,7 @@
 /* ============================================================
    Vorex — checkout.js
-   Vanilla JS — runs on index.html only.
+   Vanilla JS — runs on index.html only (other pages defer-load it
+   but every selector .querySelectorAll's gracefully on absent DOM).
 
    Responsibilities:
      1. Pricing toggle (Monthly ↔ Annual) — swaps prices + active
@@ -8,7 +9,8 @@
      2. Pricing CTA click — POSTs to the Netlify Function with
         the active price ID, then redirects to Stripe Checkout.
      3. Reveal-on-scroll for `.reveal` elements (IntersectionObserver).
-     4. Smooth-scroll polyfill not needed — CSS scroll-behavior: smooth.
+     4. Mobile nav toggle (#nav-toggle / #nav-menu).
+     5. Demo modal placeholder (until video lands).
    ============================================================ */
 
 (function () {
@@ -106,9 +108,11 @@
     });
 
     /* -----------------------------------------
-       3. Reveal-on-scroll
+       3. Reveal-on-scroll (with CSS-var stagger)
        ----------------------------------------- */
-    if ("IntersectionObserver" in window) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!reduceMotion && "IntersectionObserver" in window) {
         const io = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -116,16 +120,54 @@
                     io.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
 
         document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     } else {
-        // Fallback: just show everything
+        // Reduced-motion users + IE/older browsers — surface content immediately
         document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
 
     /* -----------------------------------------
-       4. Demo modal placeholder
+       4. Mobile nav toggle
+       ----------------------------------------- */
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu   = document.getElementById("nav-menu");
+    function closeNav() {
+        if (!navToggle || !navMenu) return;
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open menu");
+        navMenu.dataset.open = "false";
+        document.body.style.overflow = "";
+    }
+    function openNav() {
+        if (!navToggle || !navMenu) return;
+        navToggle.setAttribute("aria-expanded", "true");
+        navToggle.setAttribute("aria-label", "Close menu");
+        navMenu.dataset.open = "true";
+        document.body.style.overflow = "hidden";
+    }
+    if (navToggle && navMenu) {
+        navToggle.addEventListener("click", () => {
+            const expanded = navToggle.getAttribute("aria-expanded") === "true";
+            expanded ? closeNav() : openNav();
+        });
+        // Any link tap closes the overlay so the anchor scroll lands cleanly
+        navMenu.querySelectorAll("a").forEach((a) =>
+            a.addEventListener("click", () => closeNav())
+        );
+        // Escape closes
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeNav();
+        });
+        // Resize back to desktop also closes (in case the user rotated)
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 820) closeNav();
+        });
+    }
+
+    /* -----------------------------------------
+       5. Demo modal placeholder
        ----------------------------------------- */
     document.querySelectorAll("[data-demo-modal]").forEach((el) => {
         el.addEventListener("click", (e) => {

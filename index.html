@@ -5,19 +5,15 @@
     Vorex — vorex.fit
     Phase 3 coach acquisition site.
 
-    BEFORE GOING LIVE, replace the six Stripe price ID
-    placeholders below with real values from your Stripe Dashboard
-    (Products → click the tier → copy the price IDs):
+    Stripe price IDs (data attributes on each pricing CTA below —
+    search "data-price-id-monthly" / "data-price-id-annual"):
 
-      Starter   — Monthly   data-price-id-monthly="price_1TI03GLHLlV3sIIRVG1zi4aC"
-      Starter   — Annual    data-price-id-annual="price_1TI03GLHLlV3sIIRkkXgbhjm"
-      Standard  — Monthly   data-price-id-monthly="price_1TI05RLHLlV3sIIR9GNRflqo"
-      Standard  — Annual    data-price-id-annual="price_1TI05RLHLlV3sIIR7ibVhjVh"
-      Elite     — Monthly   data-price-id-monthly="price_1TI07VLHLlV3sIIRolFJeSxy"
-      Elite     — Annual    data-price-id-annual="price_1TI07VLHLlV3sIIRyXhcs4Zr"
-
-    The IDs live as data attributes on each pricing CTA below —
-    search "data-price-id-monthly" / "data-price-id-annual".
+      Starter   — Monthly   price_1TI03GLHLlV3sIIRVG1zi4aC
+      Starter   — Annual    price_1TI03GLHLlV3sIIRkkXgbhjm
+      Standard  — Monthly   price_1TI05RLHLlV3sIIR9GNRflqo
+      Standard  — Annual    price_1TI05RLHLlV3sIIR7ibVhjVh
+      Elite     — Monthly   price_1TI07VLHLlV3sIIRolFJeSxy
+      Elite     — Annual    price_1TI07VLHLlV3sIIRyXhcs4Zr
     ============================================================
 -->
 <head>
@@ -25,11 +21,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#080808">
     <title>Vorex — Built for coaches. Powered by AI.</title>
-    <meta name="description" content="Vorex is the AI-powered coaching system trusted by D1 and club programs. Build workouts, track nutrition, and turn 30 athletes into one accountable team.">
+    <meta name="description" content="Vorex is the AI-powered coaching system built by a D1 athlete for serious teams. Build workouts, track nutrition, and turn 30 athletes into one accountable team.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Vorex — Built for coaches. Powered by AI.">
-    <meta property="og:description" content="The AI-powered coaching system for serious teams. Workouts, nutrition, leaderboards — one app.">
+    <meta property="og:description" content="Vorex is the AI-powered coaching system built by a D1 athlete for serious teams. Workouts, nutrition, leaderboards — one app.">
     <meta property="og:image" content="/assets/og-image.png">
     <meta property="og:url" content="https://vorex.fit">
     <meta property="og:type" content="website">
@@ -39,12 +35,62 @@
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <link rel="apple-touch-icon" href="/assets/logo.png">
 
-    <!-- Fonts -->
+    <!-- Fonts — preconnect + preload-async so the Google CSS doesn't
+         render-block (FCP/LCP ~600ms faster on mobile). font-display:
+         swap is baked into Google's CSS via &display=swap.
+         Weight 300 was dropped — not referenced anywhere in styles.css. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&display=swap"></noscript>
 
     <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- Shared SVG icon library — define once, reference via <use href="#icon-x"> -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <!-- Bolt — AI-built workouts -->
+            <symbol id="icon-bolt" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+            </symbol>
+            <!-- Plate / fork — nutrition -->
+            <symbol id="icon-plate" viewBox="0 0 24 24">
+                <circle cx="12" cy="13" r="8"/>
+                <path d="M12 5v16M16 9l-4 4-4-4"/>
+            </symbol>
+            <!-- Trophy — leaderboard -->
+            <symbol id="icon-trophy" viewBox="0 0 24 24">
+                <path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/>
+                <path d="M7 6H4a2 2 0 0 0 2 4M17 6h3a2 2 0 0 1-2 4M9 18h6M10 22h4M12 14v4"/>
+            </symbol>
+            <!-- Video — form analysis -->
+            <symbol id="icon-video" viewBox="0 0 24 24">
+                <rect x="2" y="6" width="14" height="12" rx="2"/>
+                <path d="M16 10l6-3v10l-6-3z"/>
+            </symbol>
+            <!-- Chart — weekly reports -->
+            <symbol id="icon-chart" viewBox="0 0 24 24">
+                <path d="M3 3v18h18"/>
+                <path d="M7 14l3-3 3 3 5-5"/>
+            </symbol>
+            <!-- People — multi-coach -->
+            <symbol id="icon-people" viewBox="0 0 24 24">
+                <circle cx="9" cy="8" r="3"/>
+                <path d="M3 21v-1a6 6 0 0 1 12 0v1"/>
+                <circle cx="17" cy="9" r="2.5"/>
+                <path d="M15 21v-1a5 5 0 0 1 7-4.5"/>
+            </symbol>
+            <!-- Checkmark — pricing features -->
+            <symbol id="icon-check" viewBox="0 0 24 24">
+                <path d="M4 12l5 5L20 6"/>
+            </symbol>
+            <!-- Play — demo poster -->
+            <symbol id="icon-play" viewBox="0 0 24 24">
+                <path d="M7 4v16l13-8z" fill="currentColor" stroke="none"/>
+            </symbol>
+        </defs>
+    </svg>
 </head>
 <body>
 
@@ -52,35 +98,98 @@
     <nav class="nav">
         <div class="nav__inner">
             <a href="#" class="nav__brand" aria-label="Vorex home">
-                <img src="/assets/logo.png" alt="" class="nav__brand-mark" width="32" height="32">
+                <img src="/assets/logo.png" alt="" class="nav__brand-mark" width="30" height="30">
                 <span>VOREX</span>
             </a>
             <div class="nav__links">
                 <a href="#features" class="nav__link">Features</a>
+                <a href="#how-it-works" class="nav__link">How it works</a>
                 <a href="#pricing" class="nav__link">Pricing</a>
                 <a href="#athletes" class="nav__link">For Athletes</a>
-                <a href="#pricing" class="cta cta--gold cta--small">Start coaching</a>
+                <a href="#pricing" class="cta cta--outline cta--small">Start free trial</a>
             </div>
+            <button class="nav__toggle" id="nav-toggle" type="button"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="nav__menu" id="nav-menu" data-open="false">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#athletes">For Athletes</a>
+            <a href="#pricing" class="cta cta--gold cta--small">Start free trial</a>
         </div>
     </nav>
 
+    <main id="main">
     <!-- =================== HERO =================== -->
     <header class="hero">
         <div class="hero__bg"></div>
-        <div class="hero__content">
-            <span class="hero__eyebrow">Coaching software for serious teams</span>
-            <h1 class="hero__title">BUILT FOR COACHES.<br><span>POWERED BY AI.</span></h1>
-            <p class="hero__subtitle">Train smarter, track everything, and turn 30 athletes into one accountable team. Vorex is the AI-powered coaching system trusted by D1 and club programs.</p>
-            <div class="hero__ctas">
-                <a href="#pricing" class="cta cta--gold">SEE PRICING</a>
+        <div class="hero__grid">
+            <div class="hero__content">
+                <span class="hero__eyebrow reveal">Coaching software for serious teams</span>
+                <h1 class="hero__title reveal" style="--stagger:1">
+                    BUILT FOR COACHES.<br>
+                    <span class="hero__title__accent">POWERED BY AI.</span>
+                </h1>
+                <p class="hero__subtitle reveal" style="--stagger:2">Train smarter, track everything, and turn 30 athletes into one accountable team. Vorex is the AI-powered coaching system built by a D1 athlete for serious teams.</p>
+                <div class="hero__ctas reveal" style="--stagger:3">
+                    <a href="#pricing" class="cta cta--gold">START FREE TRIAL</a>
+                    <a href="#how-it-works" class="cta cta--ghost">SEE HOW IT WORKS</a>
+                </div>
+                <div class="trusted reveal" style="--stagger:4" role="note">
+                    <span class="trusted__logo">TWO FLORIDA USL2 CLUBS ON BOARD FOR THE 2026 SEASON</span>
+                </div>
             </div>
-            <div class="trusted">
-                <span class="trusted__label">Trusted by coaches at</span>
-                <span class="trusted__logo">STETSON</span>
-                <span class="trusted__logo">UCF</span>
-                <span class="trusted__logo">ROLLINS</span>
-                <span class="trusted__logo">ECNL</span>
-                <span class="trusted__logo">USL ACADEMY</span>
+            <div class="hero__visual reveal" style="--stagger:2" aria-hidden="true">
+                <div class="hero__glow"></div>
+                <!--
+                    HERO VISUAL — pure CSS/SVG product motif (Vorex Score ring + 3 stat bars).
+                    Self-contained, no asset dependency, animation respects prefers-reduced-motion.
+                    To swap for a real dashboard screenshot later, replace the .hero-score block
+                    below with:
+                        <img src="/assets/dashboard-hero.png"
+                             alt="Vorex coach dashboard"
+                             width="800" height="1080" loading="eager">
+                    The surrounding column sizing + .hero__glow stay.
+                -->
+                <div class="hero-score">
+                    <div class="hero-score__ring-wrap">
+                        <svg class="hero-score__ring" viewBox="0 0 240 240" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="hero-score-gradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#F5E070"/>
+                                    <stop offset="55%" stop-color="#C8960C"/>
+                                    <stop offset="100%" stop-color="#A07830"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="hero-score__ring-track" cx="120" cy="120" r="105"/>
+                            <circle class="hero-score__ring-progress" cx="120" cy="120" r="105"/>
+                        </svg>
+                        <div class="hero-score__center">
+                            <div class="hero-score__value">87</div>
+                            <div class="hero-score__label">Vorex Score</div>
+                        </div>
+                    </div>
+                    <div class="hero-score__stats">
+                        <div class="hero-score__row" style="--bar-delay:0; --target-width:92%;">
+                            <span class="hero-score__row-label">Training</span>
+                            <div class="hero-score__bar"><div class="hero-score__bar-fill"></div></div>
+                            <span class="hero-score__row-value">92</span>
+                        </div>
+                        <div class="hero-score__row" style="--bar-delay:1; --target-width:85%;">
+                            <span class="hero-score__row-label">Nutrition</span>
+                            <div class="hero-score__bar"><div class="hero-score__bar-fill"></div></div>
+                            <span class="hero-score__row-value">85</span>
+                        </div>
+                        <div class="hero-score__row" style="--bar-delay:2; --target-width:84%;">
+                            <span class="hero-score__row-label">Sleep</span>
+                            <div class="hero-score__bar"><div class="hero-score__bar-fill"></div></div>
+                            <span class="hero-score__row-value">84</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -89,37 +198,49 @@
     <section id="features" class="section--centered">
         <div class="container">
             <span class="section__eyebrow reveal">What your team gets</span>
-            <h2 class="section__title reveal">Everything you need to coach at scale</h2>
-            <p class="section__subtitle reveal">Build programs, track nutrition, and review form without juggling six tools. One app, one source of truth, one accountable team.</p>
+            <h2 class="section__title reveal" style="--stagger:1">Everything you need to coach at scale</h2>
+            <p class="section__subtitle reveal" style="--stagger:2">Build programs, track nutrition, and review form without juggling six tools. One app, one source of truth, one accountable team.</p>
 
             <div class="features">
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">⚡</div>
+                <div class="feature reveal" style="--stagger:1">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-bolt"/></svg>
+                    </div>
                     <h3 class="feature__title">AI-BUILT WORKOUTS</h3>
                     <p class="feature__body">Custom programs that adapt to each athlete's data — recovery, body composition, performance history.</p>
                 </div>
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">🥗</div>
+                <div class="feature reveal" style="--stagger:2">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-plate"/></svg>
+                    </div>
                     <h3 class="feature__title">NUTRITION TRACKING</h3>
                     <p class="feature__body">Macros and meal scanning powered by Passio AI. Athletes log; coaches see compliance at a glance.</p>
                 </div>
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">🏆</div>
+                <div class="feature reveal" style="--stagger:3">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-trophy"/></svg>
+                    </div>
                     <h3 class="feature__title">TEAM LEADERBOARD</h3>
                     <p class="feature__body">Daily Vorex Scores rank effort, recovery, and consistency — driving the accountability winning teams need.</p>
                 </div>
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">🎥</div>
+                <div class="feature reveal" style="--stagger:4">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-video"/></svg>
+                    </div>
                     <h3 class="feature__title">FORM ANALYSIS</h3>
                     <p class="feature__body">Athletes upload short clips, you respond with tagged feedback in seconds. Eliminates the email back-and-forth.</p>
                 </div>
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">📊</div>
+                <div class="feature reveal" style="--stagger:5">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-chart"/></svg>
+                    </div>
                     <h3 class="feature__title">WEEKLY REPORTS</h3>
                     <p class="feature__body">Auto-emailed summaries every Sunday — workouts logged, macros hit, athletes trending up or down.</p>
                 </div>
-                <div class="feature reveal">
-                    <div class="feature__icon" aria-hidden="true">👥</div>
+                <div class="feature reveal" style="--stagger:6">
+                    <div class="feature__icon" aria-hidden="true">
+                        <svg><use href="#icon-people"/></svg>
+                    </div>
                     <h3 class="feature__title">MULTI-COACH TEAMS</h3>
                     <p class="feature__body">Bring your whole staff under one license. Assistants, coordinators, and trainers all access the same data.</p>
                 </div>
@@ -127,15 +248,43 @@
         </div>
     </section>
 
+    <!--
+    ============================================================
+    DEMO SECTION — preserved markup, currently disabled.
+    Restore by uncommenting once the 90-second walkthrough video
+    exists. When you do: replace the .demo__poster block with the
+    actual <iframe> or <video> embed, re-add the "How it works"
+    secondary CTA on the hero pointing back to #demo if desired,
+    and re-add the Demo entries to the nav + footer Product list.
+
+    <section id="demo" class="section--centered">
+        <div class="container">
+            <span class="section__eyebrow reveal">Demo</span>
+            <h2 class="section__title reveal" style="- -stagger:1">SEE IT IN 90 SECONDS</h2>
+            <p class="section__subtitle reveal" style="- -stagger:2">A guided walkthrough of the coach dashboard, athlete app, and how the two work together. Two screens, 90 seconds.</p>
+            <div class="demo__frame reveal" style="- -stagger:3">
+                <div class="demo__poster">
+                    <button class="demo__play" type="button" data-demo-modal aria-label="Play 90-second demo video">
+                        <svg aria-hidden="true"><use href="#icon-play"/></svg>
+                    </button>
+                    <span class="demo__label">90 seconds — video coming soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    ============================================================
+    -->
+
+
     <!-- =================== MONTHLY CHALLENGE =================== -->
-    <section id="challenge" class="section--centered">
+    <section id="challenge" class="section--centered challenge">
         <div class="container">
             <div class="challenge__card reveal">
                 <span class="section__eyebrow">Monthly challenge</span>
-                <h2 class="section__title">WIN <span class="challenge__amount">$100</span> EVERY MONTH</h2>
-                <p class="challenge__lead">Finish #1 on the Vorex leaderboard and take home $100 plus a free year of Pro.</p>
-                <p class="challenge__body">Every month we pay the athlete at the top of the global leaderboard. Free to enter. Log your training, climb the board, and if you finish first when the month ends, the $100 is yours. New month, new shot.</p>
-                <a href="/challenge-rules.html" class="cta cta--gold">OFFICIAL RULES</a>
+                <h2 class="section__title reveal" style="--stagger:1">WIN <span class="challenge__amount">$100</span> EVERY MONTH</h2>
+                <p class="challenge__lead reveal" style="--stagger:2">Finish #1 on the Vorex leaderboard and take home $100 plus a free year of Pro.</p>
+                <p class="challenge__body reveal" style="--stagger:3">Every month we pay the athlete at the top of the global leaderboard. Free to enter. Log your training, climb the board, and if you finish first when the month ends, the $100 is yours. New month, new shot.</p>
+                <a href="/challenge-rules.html" class="cta cta--outline reveal" style="--stagger:4">OFFICIAL RULES</a>
             </div>
         </div>
     </section>
@@ -144,11 +293,11 @@
     <section id="pricing" class="section--centered">
         <div class="container">
             <span class="section__eyebrow reveal">Pricing</span>
-            <h2 class="section__title reveal">Coach 15, 35, or 75 athletes. One flat price.</h2>
-            <p class="section__subtitle reveal">30-day free trial. Cancel anytime. All plans include your full coaching staff.</p>
+            <h2 class="section__title reveal" style="--stagger:1">Coach 15, 35, or 75 athletes. One flat price.</h2>
+            <p class="section__subtitle reveal" style="--stagger:2">30-day free trial. Cancel anytime. All plans include your full coaching staff.</p>
 
             <!-- Toggle -->
-            <div class="pricing-toggle reveal" role="tablist" aria-label="Billing period">
+            <div class="pricing-toggle reveal" style="--stagger:3" role="tablist" aria-label="Billing period">
                 <button type="button" class="pricing-toggle__btn is-active" data-period="monthly" role="tab" aria-selected="true">Monthly</button>
                 <button type="button" class="pricing-toggle__btn" data-period="annual" role="tab" aria-selected="false">
                     Annual <span class="pricing-toggle__save">SAVE 20%</span>
@@ -159,7 +308,7 @@
             <!-- Cards -->
             <div class="pricing">
                 <!-- STARTER -->
-                <article class="price-card reveal">
+                <article class="price-card reveal" style="--stagger:1">
                     <div>
                         <h3 class="price-card__tier">STARTER</h3>
                         <p class="price-card__capacity">Up to 15 athletes</p>
@@ -170,15 +319,15 @@
                         <p class="price-card__note" data-note-monthly="" data-note-annual="Billed yearly · $468/yr"></p>
                     </div>
                     <ul class="price-card__features">
-                        <li>AI workout builder</li>
-                        <li>Nutrition + macro tracking</li>
-                        <li>Team leaderboard</li>
-                        <li>Form analysis</li>
-                        <li>Weekly reports</li>
-                        <li>Multi-coach access</li>
-                        <li>30-day free trial</li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>AI workout builder</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Nutrition + macro tracking</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Team leaderboard</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Form analysis</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Weekly reports</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Multi-coach access</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>30-day free trial</span></li>
                     </ul>
-                    <button class="cta cta--gold cta--block"
+                    <button class="cta cta--outline cta--block"
                             data-checkout-cta
                             data-price-id-monthly="price_1TI03GLHLlV3sIIRVG1zi4aC"
                             data-price-id-annual="price_1TI03GLHLlV3sIIRkkXgbhjm">
@@ -187,7 +336,7 @@
                 </article>
 
                 <!-- STANDARD (featured) -->
-                <article class="price-card price-card--featured reveal">
+                <article class="price-card price-card--featured reveal" style="--stagger:2">
                     <div>
                         <h3 class="price-card__tier">STANDARD</h3>
                         <p class="price-card__capacity">Up to 35 athletes</p>
@@ -198,11 +347,11 @@
                         <p class="price-card__note" data-note-monthly="" data-note-annual="Billed yearly · $948/yr"></p>
                     </div>
                     <ul class="price-card__features">
-                        <li>Everything in Starter</li>
-                        <li>Priority support</li>
-                        <li>Custom team branding</li>
-                        <li>Advanced analytics</li>
-                        <li>30-day free trial</li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Everything in Starter</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Priority support</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Custom team branding</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Advanced analytics</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>30-day free trial</span></li>
                     </ul>
                     <button class="cta cta--gold cta--block"
                             data-checkout-cta
@@ -213,7 +362,7 @@
                 </article>
 
                 <!-- ELITE -->
-                <article class="price-card reveal">
+                <article class="price-card reveal" style="--stagger:3">
                     <div>
                         <h3 class="price-card__tier">ELITE</h3>
                         <p class="price-card__capacity">Up to 75 athletes</p>
@@ -224,13 +373,13 @@
                         <p class="price-card__note" data-note-monthly="" data-note-annual="Billed yearly · $1,668/yr"></p>
                     </div>
                     <ul class="price-card__features">
-                        <li>Everything in Standard</li>
-                        <li>Dedicated onboarding</li>
-                        <li>Quarterly check-ins</li>
-                        <li>Early access to new features</li>
-                        <li>30-day free trial</li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Everything in Standard</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Dedicated onboarding</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Quarterly check-ins</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>Early access to new features</span></li>
+                        <li><svg aria-hidden="true"><use href="#icon-check"/></svg><span>30-day free trial</span></li>
                     </ul>
-                    <button class="cta cta--gold cta--block"
+                    <button class="cta cta--outline cta--block"
                             data-checkout-cta
                             data-price-id-monthly="price_1TI07VLHLlV3sIIRolFJeSxy"
                             data-price-id-annual="price_1TI07VLHLlV3sIIRyXhcs4Zr">
@@ -244,26 +393,32 @@
     </section>
 
     <!-- =================== HOW IT WORKS =================== -->
-    <section class="section--centered" style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg-card-deep) 100%);">
+    <section id="how-it-works" class="section--centered how">
         <div class="container">
             <span class="section__eyebrow reveal">How it works</span>
-            <h2 class="section__title reveal">From signup to first workout in 5 minutes</h2>
+            <h2 class="section__title reveal" style="--stagger:1">From signup to first workout in 5 minutes</h2>
 
             <div class="steps">
-                <div class="step reveal">
-                    <div class="step__num">01</div>
-                    <h3 class="step__title">PICK YOUR PLAN</h3>
-                    <p class="step__body">Subscribe in 60 seconds. We email you a coach setup code.</p>
+                <div class="step reveal" style="--stagger:1">
+                    <span class="step__numeral" aria-hidden="true">01</span>
+                    <div class="step__inner">
+                        <h3 class="step__title">PICK YOUR PLAN</h3>
+                        <p class="step__body">Subscribe in 60 seconds. We email you a coach setup code.</p>
+                    </div>
                 </div>
-                <div class="step reveal">
-                    <div class="step__num">02</div>
-                    <h3 class="step__title">SET UP YOUR TEAM</h3>
-                    <p class="step__body">Download Vorex, enter your code, name your team, invite athletes.</p>
+                <div class="step reveal" style="--stagger:2">
+                    <span class="step__numeral" aria-hidden="true">02</span>
+                    <div class="step__inner">
+                        <h3 class="step__title">SET UP YOUR TEAM</h3>
+                        <p class="step__body">Download Vorex, enter your code, name your team, invite athletes.</p>
+                    </div>
                 </div>
-                <div class="step reveal">
-                    <div class="step__num">03</div>
-                    <h3 class="step__title">START COACHING</h3>
-                    <p class="step__body">Build workouts, set nutrition targets, watch your team's score climb.</p>
+                <div class="step reveal" style="--stagger:3">
+                    <span class="step__numeral" aria-hidden="true">03</span>
+                    <div class="step__inner">
+                        <h3 class="step__title">START COACHING</h3>
+                        <p class="step__body">Build workouts, set nutrition targets, watch your team's score climb.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -273,36 +428,39 @@
     <section id="athletes" class="athletes">
         <div class="athletes__inner">
             <span class="section__eyebrow reveal">For athletes</span>
-            <h2 class="section__title reveal">Your team uses Vorex. So should you.</h2>
-            <p class="section__subtitle reveal">If your coach is on Vorex, you get full Pro access free. Download the app to join your team.</p>
-            <a href="https://apps.apple.com/us/app/vorex-fitness/id6758530004" class="appstore-badge reveal" aria-label="Download Vorex on the App Store">
+            <h2 class="section__title reveal" style="--stagger:1">Your team uses Vorex. So should you.</h2>
+            <p class="section__subtitle reveal" style="--stagger:2">If your coach is on Vorex, you get full Pro access free. Download the app to join your team.</p>
+            <a href="https://apps.apple.com/us/app/vorex-fitness/id6758530004" class="appstore-badge reveal" style="--stagger:3" aria-label="Download Vorex on the App Store">
                 <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                      alt="Download on the App Store"
-                     width="180"
-                     height="60"
-                     style="height: 60px; width: auto;">
+                     width="180" height="60">
             </a>
         </div>
     </section>
 
-    <!-- =================== TESTIMONIALS =================== -->
+    <!-- =================== FOUNDER STATEMENT =================== -->
+    <!--
+        Manifesto-style centered block. Single decorative element: the oversized
+        gold "V" watermark behind the text. A real founder portrait can replace
+        the watermark later by swapping .founder-statement__watermark for:
+            <img src="/assets/founder.jpg"
+                 alt="Xavier Manning, founder of Vorex"
+                 class="founder-statement__portrait"
+                 loading="lazy">
+        with matching CSS to position it tastefully.
+    -->
     <section class="section--centered">
-        <div class="container">
-            <span class="section__eyebrow reveal">What coaches say</span>
-            <h2 class="section__title reveal">Trusted from club to college</h2>
-
-            <div class="testimonials">
-                <blockquote class="testimonial reveal">
-                    <p class="testimonial__quote">"Practice planning used to take me three hours every Sunday. Now I block out the whole season in 45 minutes and Vorex handles the personalization. My athletes show up knowing exactly what to do."</p>
-                    <footer class="testimonial__author">Coach Rutkowski · Stetson Soccer</footer>
-                </blockquote>
-                <blockquote class="testimonial reveal">
-                    <p class="testimonial__quote">"The leaderboard is the secret weapon. My freshmen are competing for top score by week two. Compliance is up across the board — workouts, hydration, sleep, all of it."</p>
-                    <footer class="testimonial__author">Coach M. · D1 Soccer Program</footer>
-                </blockquote>
+        <div class="founder-statement">
+            <span class="founder-statement__watermark" aria-hidden="true">V</span>
+            <div class="founder-statement__content">
+                <span class="section__eyebrow reveal">From the founder</span>
+                <h2 class="section__title reveal" style="--stagger:1">BUILT INSIDE A D1 LOCKER ROOM</h2>
+                <p class="founder-statement__body reveal" style="--stagger:2">Vorex was built by Xavier Manning, a Division 1 soccer player at Stetson University, to solve the problem every coach has: knowing what your athletes actually do when they leave the building. Real coach testimonials are coming as our first teams finish onboarding.</p>
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- =================== FOOTER =================== -->
     <footer class="footer">
@@ -313,23 +471,16 @@
                     <p class="footer__tag">The AI-powered coaching system for serious teams.</p>
                 </div>
                 <div class="footer__col">
-                    <h4 class="footer__heading">Product</h4>
+                    <h3 class="footer__heading">Product</h3>
                     <ul>
                         <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How it works</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#athletes">For Athletes</a></li>
                     </ul>
                 </div>
                 <div class="footer__col">
-                    <h4 class="footer__heading">Company</h4>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="mailto:xavier@vorex.fit">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer__col">
-                    <h4 class="footer__heading">Legal</h4>
+                    <h3 class="footer__heading">Legal</h3>
                     <ul>
                         <li><a href="/terms">Terms</a></li>
                         <li><a href="/privacy">Privacy</a></li>
@@ -337,10 +488,10 @@
                     </ul>
                 </div>
                 <div class="footer__col">
-                    <h4 class="footer__heading">Connect</h4>
+                    <h3 class="footer__heading">Connect</h3>
                     <ul>
-                        <li><a href="https://instagram.com/vorex.fit">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li><a href="mailto:xavier@vorex.fit">Contact</a></li>
+                        <li><a href="https://instagram.com/vorex.fit" rel="noopener">Instagram</a></li>
                     </ul>
                 </div>
             </div>
